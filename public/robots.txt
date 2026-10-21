@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://swatproperty.pk/sitemap.xml

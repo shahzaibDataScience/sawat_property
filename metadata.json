@@ -1,0 +1,6 @@
+{
+  "name": "Swat Property – Real Estate Portal in Swat Valley",
+  "description": "Buy, sell, and rent houses, plots, land, shops, and flats in Swat Valley (Mingora, Kalam, Malam Jabba, Saidu Sharif). 100% verified listings with direct WhatsApp and Call.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
