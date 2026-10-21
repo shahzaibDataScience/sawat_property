@@ -81,6 +81,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <img
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
               alt="Haji Sher Zaman"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80';
+              }}
               className="w-24 h-24 rounded-full mx-auto object-cover border-2 border-emerald-500 shadow-sm"
             />
             <div>
@@ -96,6 +99,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <img
               src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
               alt="Advocate Sher Muhammad"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80';
+              }}
               className="w-24 h-24 rounded-full mx-auto object-cover border-2 border-amber-500 shadow-sm"
             />
             <div>
@@ -111,6 +117,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <img
               src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80"
               alt="Engr. Junaid Babar"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80';
+              }}
               className="w-24 h-24 rounded-full mx-auto object-cover border-2 border-emerald-500 shadow-sm"
             />
             <div>

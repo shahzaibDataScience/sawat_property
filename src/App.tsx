@@ -195,7 +195,7 @@ export default function App() {
     } else if (currentBasePath === '/contact') {
       title = 'Contact Swat Property – Mingora Head Office & WhatsApp';
       description =
-        'Visit our office on Saidu Sharif Road Mingora or call +92 300 1234567 for immediate property assistance in Swat.';
+        'Visit our office on Main Bypass Road, Fizagat, Mingora, Swat, KP or call +92 300 1234567 for immediate property assistance in Swat.';
     }
 
     document.title = title;

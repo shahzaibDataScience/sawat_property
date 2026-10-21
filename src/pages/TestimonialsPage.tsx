@@ -55,6 +55,9 @@ export const TestimonialsPage: React.FC = () => {
                 <img
                   src={test.avatar}
                   alt={test.name}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80';
+                  }}
                   className="w-12 h-12 rounded-full object-cover shadow-xs border border-stone-200"
                 />
                 <div>

@@ -452,6 +452,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <img
                   src={area.image}
                   alt={area.name}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80';
+                  }}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
@@ -629,6 +632,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <img
                   src={test.avatar}
                   alt={test.name}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80';
+                  }}
                   className="w-10 h-10 rounded-full object-cover shrink-0"
                 />
                 <div className="min-w-0">

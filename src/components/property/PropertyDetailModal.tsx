@@ -29,7 +29,7 @@ import { PropertyCard } from './PropertyCard';
 import { PropertyDetailSkeleton } from './PropertyDetailSkeleton';
 import { useLanguage } from '../../context/LanguageContext';
 import { useFavorites } from '../../context/FavoritesContext';
-import { generateWhatsAppLink, formatPricePKR } from '../../utils/propertyUtils';
+import { generateWhatsAppLink, formatPricePKR, FALLBACK_PROPERTY_IMAGE } from '../../utils/propertyUtils';
 import { lockBodyScroll, unlockBodyScroll } from '../../utils/scrollLock';
 
 interface PropertyDetailModalProps {
@@ -206,8 +206,8 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
     }, 2200);
   };
 
-  const whatsAppMessage = `Hello Swat Property, I am viewing: "${property.title}" (Ref: #${property.id.toUpperCase()}) listed for ${property.priceFormatted} in ${property.areaName}. Please schedule a site visit and share verified legal records.`;
-  const whatsAppLink = generateWhatsAppLink(property.whatsapp, whatsAppMessage);
+  const whatsAppMessage = `Assalam-o-Alaikum, I am interested in this property on Swat Property Portal: ${property.title} (${property.priceFormatted})`;
+  const whatsAppLink = `https://wa.me/923001234567?text=${encodeURIComponent(whatsAppMessage)}`;
 
   // Categorized Photos (Exterior, Living Room, Bedroom, Kitchen, Bathroom, Views)
   const categorizedImages = useMemo(() => {
@@ -410,6 +410,9 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                     src={img}
                     alt={`${property.title} - photo ${idx + 1}`}
                     loading="lazy"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = FALLBACK_PROPERTY_IMAGE;
+                    }}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all" />
@@ -451,52 +454,27 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <span className="text-stone-400 block text-[10px] uppercase font-bold">Bathrooms</span>
                   <p className="font-bold text-stone-800 flex items-center gap-1.5 mt-0.5">
                     <Bath className="w-3.5 h-3.5 text-emerald-700" />
-                    <span>{property.baths} Attached</span>
+                    <span>{property.baths} Attached Baths</span>
                   </p>
                 </div>
               )}
 
               <div className="p-2.5 bg-white rounded-xl border border-stone-200/60">
-                <span className="text-stone-400 block text-[10px] uppercase font-bold">Parking</span>
+                <span className="text-stone-400 block text-[10px] uppercase font-bold">Furnishing</span>
                 <p className="font-bold text-stone-800 flex items-center gap-1.5 mt-0.5">
-                  <Car className="w-3.5 h-3.5 text-emerald-700" />
-                  <span>{property.parking ?? 1} Vehicles</span>
-                </p>
-              </div>
-
-              <div className="p-2.5 bg-white rounded-xl border border-stone-200/60">
-                <span className="text-stone-400 block text-[10px] uppercase font-bold">Furnished</span>
-                <p className="font-bold text-stone-800 capitalize mt-0.5">
-                  {property.furnished === true ? 'Yes (Furnished)' : property.furnished === 'Semi-Furnished' ? 'Semi-Furnished' : 'Unfurnished'}
-                </p>
-              </div>
-
-              <div className="p-2.5 bg-white rounded-xl border border-stone-200/60">
-                <span className="text-stone-400 block text-[10px] uppercase font-bold">Property Type</span>
-                <p className="font-bold text-stone-800 capitalize mt-0.5">{property.type}</p>
-              </div>
-
-              <div className="p-2.5 bg-white rounded-xl border border-stone-200/60">
-                <span className="text-stone-400 block text-[10px] uppercase font-bold">Purpose</span>
-                <p className="font-bold text-stone-800 capitalize mt-0.5">For {property.purpose}</p>
-              </div>
-
-              <div className="p-2.5 bg-white rounded-xl border border-stone-200/60">
-                <span className="text-stone-400 block text-[10px] uppercase font-bold">Land Registry</span>
-                <p className="font-bold text-emerald-700 flex items-center gap-1 mt-0.5">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Verified Fard</span>
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>{typeof property.furnished === 'string' ? property.furnished : property.furnished ? 'Furnished' : 'Unfurnished'}</span>
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Description */}
+          {/* Description & Urdu Description */}
           <div className="space-y-3">
-            <h3 className="font-bold text-base text-stone-900 font-heading">
-              {isUrdu ? 'پراپرٹی کی مکمل تفصیل' : 'Property Overview & Features'}
+            <h3 className="font-bold text-sm text-stone-900 font-heading">
+              {isUrdu ? 'جائیداد کی مکمل تفصیل' : 'Property Overview & Description'}
             </h3>
-            <p className="text-sm text-stone-700 leading-relaxed">
+            <p className="text-stone-700 text-sm sm:text-base leading-relaxed">
               {property.description}
             </p>
             {property.descriptionUrdu && (
@@ -575,6 +553,9 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                     <img
                       src={sim.images[0]}
                       alt={sim.title}
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = FALLBACK_PROPERTY_IMAGE;
+                      }}
                       className="w-16 h-16 rounded-lg object-cover shrink-0"
                     />
                     <div className="min-w-0 flex-1">
@@ -597,7 +578,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
           )}
         </div>
 
-        {/* Sticky Bottom Bar with Call, WhatsApp, and "Book a Visit" */}
+        {/* Sticky Bottom Bar with Call, Book a Visit, and Chat on WhatsApp */}
         <div className="sticky bottom-0 z-30 bg-white/95 backdrop-blur-md px-4 sm:px-6 py-3 border-t border-stone-200 flex flex-wrap items-center justify-between gap-3 shadow-lg">
           <div className="hidden sm:block">
             <span className="text-[11px] text-stone-500 font-medium block">
@@ -611,7 +592,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <a
               href={`tel:${property.contactPhone}`}
-              className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-stone-300 hover:bg-stone-50 text-stone-800 font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors"
+              className="flex-1 sm:flex-none px-3.5 py-2.5 rounded-xl border border-stone-300 hover:bg-stone-50 text-stone-800 font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors"
             >
               <Phone className="w-4 h-4 text-amber-600" />
               <span>Call Agent</span>
@@ -619,7 +600,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
 
             <button
               onClick={() => setShowBookingModal(true)}
-              className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-900 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
+              className="flex-1 sm:flex-none px-3.5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-900 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
             >
               <Calendar className="w-4 h-4" />
               <span>Book a Visit</span>
@@ -629,10 +610,10 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
               href={whatsAppLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer"
+              className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
-              <span>WhatsApp Inquiry</span>
+              <span>Chat on WhatsApp</span>
             </a>
           </div>
         </div>

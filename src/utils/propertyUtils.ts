@@ -1,25 +1,29 @@
 import { PropertyListing, FilterState, AreaUnit } from '../types/property';
 
+export const FALLBACK_PROPERTY_IMAGE =
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
+
 /**
- * Formats a PKR price value into Crore, Lakh, or thousands string.
+ * Formats a PKR price value into Crore, Lakh, or thousands string using Pakistani formatting.
+ * Examples: PKR 1.85 Crore, PKR 65 Lakh, PKR 120,000 / month.
  */
 export function formatPricePKR(price: number, purpose: 'sale' | 'rent'): string {
   if (purpose === 'rent') {
     if (price >= 100000) {
       const lakhs = price / 100000;
-      return `Rs. ${lakhs % 1 === 0 ? lakhs.toFixed(0) : lakhs.toFixed(1)} Lakh/mo`;
+      return `PKR ${lakhs % 1 === 0 ? lakhs.toFixed(0) : lakhs.toFixed(1)} Lakh / month`;
     }
-    return `Rs. ${price.toLocaleString('en-PK')}/month`;
+    return `PKR ${price.toLocaleString('en-PK')} / month`;
   }
 
   if (price >= 10000000) {
     const crores = price / 10000000;
-    return `Rs. ${crores % 1 === 0 ? crores.toFixed(0) : crores.toFixed(2).replace(/\.?0+$/, '')} Crore`;
+    return `PKR ${crores % 1 === 0 ? crores.toFixed(0) : crores.toFixed(2).replace(/\.?0+$/, '')} Crore`;
   } else if (price >= 100000) {
     const lakhs = price / 100000;
-    return `Rs. ${lakhs % 1 === 0 ? lakhs.toFixed(0) : lakhs.toFixed(1).replace(/\.?0+$/, '')} Lakh`;
+    return `PKR ${lakhs % 1 === 0 ? lakhs.toFixed(0) : lakhs.toFixed(1).replace(/\.?0+$/, '')} Lakh`;
   } else {
-    return `Rs. ${price.toLocaleString('en-PK')}`;
+    return `PKR ${price.toLocaleString('en-PK')}`;
   }
 }
 

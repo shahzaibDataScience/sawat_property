@@ -74,6 +74,9 @@ export const BlogPage: React.FC<BlogPageProps> = ({
           <img
             src={currentBlog.image}
             alt={currentBlog.title}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80';
+            }}
             className="w-full h-full object-cover"
           />
         </div>
@@ -151,6 +154,9 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                 <img
                   src={post.image}
                   alt={post.title}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80';
+                  }}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <span className="absolute top-3 left-3 bg-[#2f5d3a] text-white text-[11px] font-bold px-2.5 py-1 rounded-md">

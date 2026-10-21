@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { FALLBACK_PROPERTY_IMAGE } from '../../utils/propertyUtils';
 
 interface ImageLightboxProps {
   images: string[];
@@ -62,6 +63,9 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
         <img
           src={images[currentIndex]}
           alt={`Property image ${currentIndex + 1}`}
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).src = FALLBACK_PROPERTY_IMAGE;
+          }}
           className="max-h-[75vh] max-w-[90vw] object-contain rounded-lg shadow-2xl transition-all"
         />
 
@@ -84,7 +88,14 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
               idx === currentIndex ? 'border-amber-500 scale-105' : 'border-transparent opacity-60 hover:opacity-100'
             }`}
           >
-            <img src={img} alt={`Thumb ${idx + 1}`} className="w-full h-full object-cover" />
+            <img 
+              src={img} 
+              alt={`Thumb ${idx + 1}`} 
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = FALLBACK_PROPERTY_IMAGE;
+              }}
+              className="w-full h-full object-cover" 
+            />
           </button>
         ))}
       </div>

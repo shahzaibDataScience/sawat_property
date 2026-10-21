@@ -14,7 +14,7 @@ import {
 import { PropertyListing } from '../../types/property';
 import { useLanguage } from '../../context/LanguageContext';
 import { useFavorites } from '../../context/FavoritesContext';
-import { generateWhatsAppLink } from '../../utils/propertyUtils';
+import { FALLBACK_PROPERTY_IMAGE } from '../../utils/propertyUtils';
 
 interface PropertyCardProps {
   property: PropertyListing;
@@ -60,12 +60,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     toggleFavorite(property.id);
   };
 
-  const whatsAppMessage = `Hello Swat Property, I am interested in: "${property.title}" (Ref: #${property.id.toUpperCase()}) listed for ${property.priceFormatted} in ${property.areaName}. Please share more details and arrange a visit.`;
-  const whatsAppLink = generateWhatsAppLink(property.whatsapp, whatsAppMessage);
+  const whatsAppMessage = `Assalam-o-Alaikum, I am interested in this property on Swat Property Portal: ${property.title} (${property.priceFormatted})`;
+  const whatsAppLink = `https://wa.me/923001234567?text=${encodeURIComponent(whatsAppMessage)}`;
 
   return (
     <div
-      className={`group relative bg-white rounded-2xl border border-stone-200 overflow-hidden card-shadow card-shadow-hover flex transition-all text-left ${
+      className={`group relative bg-white rounded-2xl border border-stone-200 overflow-hidden card-shadow card-shadow-hover flex transition-all text-left w-full ${
         viewMode === 'list' ? 'flex-col sm:flex-row' : 'flex-col'
       }`}
     >
@@ -77,11 +77,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         aria-label={`View details for ${property.title}`}
       />
       {/* Property Image Container */}
-      <div className={`relative overflow-hidden ${viewMode === 'list' ? 'sm:w-2/5 h-64 sm:h-auto' : 'h-60 w-full'}`}>
+      <div className={`relative overflow-hidden ${viewMode === 'list' ? 'sm:w-2/5 h-60 sm:h-auto' : 'h-60 w-full'}`}>
         <img
           src={property.images[0]}
           alt={property.title}
           loading="lazy"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).src = FALLBACK_PROPERTY_IMAGE;
+          }}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
@@ -207,28 +210,28 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           </div>
         </div>
 
-        {/* Card CTA Buttons: Call & WhatsApp */}
-        <div className="relative z-20 flex items-center gap-2 pt-1" onClick={(e) => { e.stopPropagation(); }}>
+        {/* Card CTA Buttons: Call & Chat on WhatsApp */}
+        <div className="relative z-20 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1" onClick={(e) => { e.stopPropagation(); }}>
           <a
             href={whatsAppLink}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="flex-1 py-2.5 px-3 rounded-xl bg-[#2f5d3a] hover:bg-[#254b2e] text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-xs"
-            title="Chat on WhatsApp about this property"
+            className="flex-1 py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-xs"
+            title="Chat on WhatsApp"
           >
-            <MessageCircle className="w-4 h-4 fill-emerald-300 text-emerald-300" />
-            <span>{isUrdu ? 'واٹس ایپ' : 'WhatsApp'}</span>
+            <MessageCircle className="w-4 h-4 fill-white" />
+            <span>{isUrdu ? 'واٹس ایپ پر بات کریں' : 'Chat on WhatsApp'}</span>
           </a>
 
           <a
             href={`tel:${property.contactPhone}`}
             onClick={(e) => e.stopPropagation()}
-            className="py-2.5 px-3 rounded-xl border border-stone-300 hover:border-emerald-700 hover:bg-stone-50 text-stone-800 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors"
+            className="py-2.5 px-3.5 rounded-xl border border-stone-300 hover:border-emerald-700 hover:bg-stone-50 text-stone-800 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors"
             title="Call Swat Property Agent"
           >
             <Phone className="w-4 h-4 text-amber-600" />
-            <span className="hidden sm:inline">{isUrdu ? 'کال' : 'Call'}</span>
+            <span>{isUrdu ? 'کال کریں' : 'Call'}</span>
           </a>
         </div>
       </div>

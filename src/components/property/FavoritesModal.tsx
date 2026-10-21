@@ -72,6 +72,9 @@ export const FavoritesModal: React.FC<FavoritesModalProps> = ({
                 <img
                   src={item.images[0]}
                   alt={item.title}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
+                  }}
                   className="w-24 h-24 object-cover rounded-lg shrink-0 cursor-pointer"
                   onClick={() => {
                     onSelectProperty(item.slug);

@@ -10,12 +10,12 @@ import {
 } from './propertyUtils.ts';
 import { PropertyListing } from '../types/property.ts';
 
-test('formatPricePKR formats Crore, Lakh, and Rent prices correctly', () => {
-  assert.equal(formatPricePKR(25000000, 'sale'), 'Rs. 2.5 Crore');
-  assert.equal(formatPricePKR(10000000, 'sale'), 'Rs. 1 Crore');
-  assert.equal(formatPricePKR(8500000, 'sale'), 'Rs. 85 Lakh');
-  assert.equal(formatPricePKR(45000, 'rent'), 'Rs. 45,000/month');
-  assert.equal(formatPricePKR(150000, 'rent'), 'Rs. 1.5 Lakh/mo');
+test('formatPricePKR formats Crore, Lakh, and Rent prices correctly in PKR', () => {
+  assert.equal(formatPricePKR(25000000, 'sale'), 'PKR 2.5 Crore');
+  assert.equal(formatPricePKR(10000000, 'sale'), 'PKR 1 Crore');
+  assert.equal(formatPricePKR(8500000, 'sale'), 'PKR 85 Lakh');
+  assert.equal(formatPricePKR(45000, 'rent'), 'PKR 45,000 / month');
+  assert.equal(formatPricePKR(150000, 'rent'), 'PKR 1.5 Lakh / month');
 });
 
 test('convertAreaToSqFt converts Marla and Kanal accurately', () => {
@@ -36,9 +36,9 @@ test('calculateMortgage computes monthly installment and loan amount accurately'
 });
 
 test('generateWhatsAppLink generates encoded click-to-chat URL', () => {
-  const url = generateWhatsAppLink('+92 300 1234567', 'Inquiring about 5 Marla House in Mingora');
+  const url = generateWhatsAppLink('+92 300 1234567', 'Assalam-o-Alaikum, I am interested in this property on Swat Property Portal');
   assert.ok(url.startsWith('https://wa.me/923001234567?text='));
-  assert.ok(url.includes('Mingora'));
+  assert.ok(url.includes('Assalam-o-Alaikum'));
 });
 
 test('filterProperties and sortProperties work as expected', () => {
@@ -51,16 +51,16 @@ test('filterProperties and sortProperties work as expected', () => {
       purpose: 'sale',
       type: 'house',
       price: 15000000,
-      priceFormatted: 'Rs. 1.5 Crore',
+      priceFormatted: 'PKR 1.5 Crore',
       areaValue: 5,
       areaUnit: 'Marla',
       beds: 3,
       baths: 3,
       parking: 1,
       furnished: true,
-      location: 'Saidu Sharif Road',
-      areaName: 'Mingora',
-      address: 'Makanbagh, Mingora, Swat',
+      location: 'Kanju Township Road',
+      areaName: 'Kanju',
+      address: 'Sector B, Kanju Township, Swat',
       description: 'Modern house',
       descriptionUrdu: 'جدید مکان',
       features: ['Electricity', 'Sui Gas'],
@@ -79,7 +79,7 @@ test('filterProperties and sortProperties work as expected', () => {
       purpose: 'rent',
       type: 'flat',
       price: 60000,
-      priceFormatted: 'Rs. 60,000/month',
+      priceFormatted: 'PKR 60,000 / month',
       areaValue: 4,
       areaUnit: 'Marla',
       beds: 2,

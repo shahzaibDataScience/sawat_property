@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 interface FavoritesContextType {
   favorites: string[];
   toggleFavorite: (id: string) => void;
-  isFavorite: (id: string) => void;
+  isFavorite: (id: string) => boolean;
   removeFavorite: (id: string) => void;
   clearFavorites: () => void;
   count: number;

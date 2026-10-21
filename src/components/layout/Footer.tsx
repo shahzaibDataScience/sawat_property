@@ -151,7 +151,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <span>
-                  Main Saidu Sharif Road, Near Makanbagh Chowk, Mingora, Swat, KPK 19130, Pakistan
+                  Main Bypass Road, Fizagat, Mingora, Swat, KP, Pakistan
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -162,7 +162,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
               <div className="flex items-center gap-2">
                 <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href="https://wa.me/923001234567" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <a href="https://wa.me/923001234567?text=Assalam-o-Alaikum,%20I%20am%20interested%20in%20this%20property%20on%20Swat%20Property%20Portal" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                   WhatsApp: +92 300 1234567
                 </a>
               </div>

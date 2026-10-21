@@ -30,7 +30,7 @@ export const ContactPage: React.FC = () => {
 
   const whatsAppLink = generateWhatsAppLink(
     '+923001234567',
-    'Hello Swat Property, I would like to schedule an in-person or online consultation regarding Swat real estate.'
+    'Assalam-o-Alaikum, I am interested in this property on Swat Property Portal'
   );
 
   return (
@@ -60,7 +60,7 @@ export const ContactPage: React.FC = () => {
                 {isUrdu ? 'سوات ہیڈ آفس' : 'Mingora Head Office'}
               </h4>
               <p className="text-xs text-stone-600 mt-1 leading-relaxed">
-                Main Saidu Sharif Road, Near Makanbagh Chowk, Mingora, Swat, Khyber Pakhtunkhwa 19130, Pakistan
+                Main Bypass Road, Fizagat, Mingora, Swat, KP, Pakistan
               </p>
             </div>
           </div>

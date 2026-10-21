@@ -70,8 +70,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
     setFormSubmitted(true);
   };
 
-  const whatsAppMessage = `Hello Swat Property, I am interested in: "${property.title}" (Ref: #${property.id.toUpperCase()}) listed for ${property.priceFormatted} in ${property.areaName}. Please share further documentation and visit schedule.`;
-  const whatsAppLink = generateWhatsAppLink(property.whatsapp, whatsAppMessage);
+  const whatsAppMessage = `Assalam-o-Alaikum, I am interested in this property on Swat Property Portal: ${property.title} (${property.priceFormatted})`;
+  const whatsAppLink = `https://wa.me/923001234567?text=${encodeURIComponent(whatsAppMessage)}`;
 
   // Similar properties in same area or type
   const similarProperties = allListings
@@ -196,6 +196,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           <img
             src={property.images[0]}
             alt={property.title}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
+            }}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all" />
@@ -217,6 +220,9 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
             <img
               src={img}
               alt={`${property.title} preview ${idx + 2}`}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
+              }}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 transition-all" />
@@ -376,7 +382,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   <ShieldCheck className="w-3.5 h-3.5" />
                   Verified Agency Agent
                 </p>
-                <p className="text-[11px] text-stone-500">Makanbagh Office, Mingora Swat</p>
+                <p className="text-[11px] text-stone-500">Main Bypass Road, Fizagat, Mingora Swat</p>
               </div>
             </div>
 
